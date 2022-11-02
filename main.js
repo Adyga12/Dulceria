@@ -1,58 +1,55 @@
 class dulces {
-  constructor(id, nombre, cantidad, precio) {
-    this.id = id;
-    this.nombre = nombre;
-    this.cantidad = cantidad;
-    this.precio = precio;
-    dulces.all.push(this);
+    constructor(id, nombre, cantidad, precio) {
+      this.caramelos = []
+    }
+
+    getById(id){
+        return this.caramelos.find(x => x.id === id);
+    }
+
+    getAll(){
+        return this.caramelos;
+    }
+
+    saveObj(obj){
+        this.caramelos.push(obj);
+    }
+
+    deleteById(num){
+        let i = this.caramelos.find(x=> x.id === num);
+        let j = this.caramelos.indexOf(i);
+        this.caramelos.splice(j, 1);
+        return this.caramelos;
+    }
+
+    deleteAll(){
+        while (this.caramelos.length > 0) {
+            this.caramelos.pop();
+        }
+    }
   }
 
-  getById(id){
-      return dulces.all.find(x => x.id === id);
-  }
+  const container = new dulces();
+  
+  container.saveObj({id: 1, nombre: "Pulparindo", cantidad: 30, precio: 70});
+  container.saveObj({id: 2, nombre: "Pelon Pelorico", cantidad: 15,precio: 120});  
+  container.saveObj({id: 3, nombre: "Lucas muecas", cantidad: 8, precio: 100});  
+  container.saveObj({id: 4, nombre: "Pica fresas", cantidad: 50,precio: 90});  
+  container.saveObj({id: 5, nombre: "Rockaleta", cantidad: 15,precio: 95});  
+  container.saveObj({id: 6, nombre: "Skwinkles", cantidad: 8,precio: 85});  
 
-  getAll(){
-      return dulces.all;
-  }
+console.log(container.getAll(dulces));
 
-  saveObj(obj){
-      dulces.all.push(obj);
-  }
+var dulceNuevo= {id:7, nombre:"doritos",cantidad: 7,precio: 105};
+console.log(container.saveObj(dulceNuevo));
+console.log(container.getAll());
 
-  deleteById(num){
-      let i = dulces.all.find(x=> x.id === num);
-      let j = dulces.all.indexOf(i);
-      dulces.all.splice(j, 1);
-      return dulces.all;
-  }
 
-  deleteAll(){
-      while (dulces.all.length > 0) {
-          dulces.all.pop();
-      }
-  }
+console.log(container.getById(5));
 
-  static all = []
-}
-var candies = [];
+console.log(container.deleteById(7));
+console.log(container.getAll());
 
-var candie1= new dulces(1, "Pulparindo", 15, 30);  
-var candie2= new dulces(2, "pelon pelorico", 6, 60);  
-var candie3 = new dulces(3, "lucas muecas", 6, 65);  
-var candie4= new dulces(4, "pica fresas", 50, 35);
-var candie5 = new dulces(5, "rocka leta", 15, 90);
-var candie6= new dulces(6, "skwinkles", 8, 95);
-
-console.log(candie1.getById(3));
-
-console.log(candie1.getAll());
-
-var candie7= new dulces(7, "doritos", 7, 105);
-console.log(candie1.saveObj(candie7));
-console.log(candie1.getAll());
-
-console.log(candie1.deleteById(7));
-console.log(candie1.getAll());
-
-console.log(candie1.deleteAll());
+console.log(container.deleteAll());
+console.log(container.getAll());
 console.log(candie1.getAll());
