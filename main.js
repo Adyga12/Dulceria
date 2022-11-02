@@ -1,55 +1,66 @@
-class dulces {
-    constructor(id, nombre, cantidad, precio) {
-      this.caramelos = []
+class container {
+    #array;
+    constructor() {
+      this.#array = [];
+    }
+    save (id, nombre, cantidad, precio) {
+        const obj = {
+            id: id,
+            nombre: nombre,
+            cantidad: cantidad,
+            precio: precio,
+        }
+        this.#array.push(obj);
     }
 
-    getById(id){
-        return this.caramelos.find(x => x.id === id);
+    getById(id){ 
+        if (this.#array.find(x => x.id === id)){
+             return this.#array.find(x => x.id === id);
+        }
+       return null;
     }
 
     getAll(){
-        return this.caramelos;
+        return this.#array;
     }
 
-    saveObj(obj){
-        this.caramelos.push(obj);
-    }
-
-    deleteById(num){
-        let i = this.caramelos.find(x=> x.id === num);
-        let j = this.caramelos.indexOf(i);
-        this.caramelos.splice(j, 1);
-        return this.caramelos;
+    deleteById(id){
+        if(this.#array.map(obj => obj.id).indexOf(id) >= 0){
+            let index = this.#array.map (obj => obj.id).indexOf(id);
+            this.#array.splice(index,1);
+        }else{
+            console.log('obejto no encontrado');
+        }
     }
 
     deleteAll(){
-        while (this.caramelos.length > 0) {
-            this.caramelos.pop();
+        while (this.#array.length > 0) {
+            this.#array.pop();
         }
     }
   }
 
-  const container = new dulces();
+  const dulces = new container();
   
-  container.saveObj({id: 1, nombre: "Pulparindo", cantidad: 30, precio: 70});
-  container.saveObj({id: 2, nombre: "Pelon Pelorico", cantidad: 15,precio: 120});  
-  container.saveObj({id: 3, nombre: "Lucas muecas", cantidad: 8, precio: 100});  
-  container.saveObj({id: 4, nombre: "Pica fresas", cantidad: 50,precio: 90});  
-  container.saveObj({id: 5, nombre: "Rockaleta", cantidad: 15,precio: 95});  
-  container.saveObj({id: 6, nombre: "Skwinkles", cantidad: 8,precio: 85});  
+  dulces.save({id: 1, nombre: "Pulparindo", cantidad: 30, precio: 70});
+  dulces.save({id: 2, nombre: "Pelon Pelorico", cantidad: 15,precio: 120});  
+  dulces.save({id: 3, nombre: "Lucas muecas", cantidad: 8, precio: 100});  
+  dulces.save({id: 4, nombre: "Pica fresas", cantidad: 50,precio: 90});  
+  dulces.save({id: 5, nombre: "Rockaleta", cantidad: 15,precio: 95});  
+  dulces.save({id: 6, nombre: "Skwinkles", cantidad: 8,precio: 85});  
 
-console.log(container.getAll(dulces));
+console.log(dulces.getAll());
 
 var dulceNuevo= {id:7, nombre:"doritos",cantidad: 7,precio: 105};
-console.log(container.saveObj(dulceNuevo));
-console.log(container.getAll());
+console.log(dulces.save(dulceNuevo));
+console.log(dulces.getAll());
 
 
-console.log(container.getById(5));
+console.log(dulces.getById(5));
 
-console.log(container.deleteById(7));
-console.log(container.getAll());
-
-console.log(container.deleteAll());
-console.log(container.getAll());
-console.log(candie1.getAll());
+console.log(dulces.deleteById(7));
+console.log(dulces.getAll());
+  
+console.log(dulces.deleteAll());
+console.log(dulces.getAll());
+console.log(dulces.getAll());
